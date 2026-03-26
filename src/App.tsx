@@ -4,6 +4,12 @@ import CountdownTimer from './components/CountdownTimer';
 import SalesNotification from './components/SalesNotification';
 
 export default function App() {
+  const trackEvent = (eventName: string, params?: object) => {
+    if (typeof window !== 'undefined' && (window as any).fbq) {
+      (window as any).fbq('track', eventName, params);
+    }
+  };
+
   const bonuses = [
     {
       id: 1,
@@ -82,7 +88,10 @@ export default function App() {
         </div>
 
         <motion.button 
-          onClick={() => document.getElementById('pricing-section')?.scrollIntoView({ behavior: 'smooth' })}
+          onClick={() => {
+            trackEvent('ViewContent', { content_name: 'Top Navigation Button' });
+            document.getElementById('pricing-section')?.scrollIntoView({ behavior: 'smooth' });
+          }}
           className="bg-brand-accent text-white px-12 py-4 rounded-2xl text-xl font-bold shadow-xl hover:bg-orange-600 transition-colors mb-12"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -240,6 +249,7 @@ export default function App() {
               href="https://pay.hotmart.com/V104993640Q?checkoutMode=10&bid=1774391275941"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackEvent('InitiateCheckout', { content_name: 'E-book Sabonetes Artesanais', value: 10.00, currency: 'EUR' })}
               className="w-full bg-brand-accent text-white py-6 rounded-2xl text-xl font-bold shadow-xl hover:bg-orange-600 transition-colors flex items-center justify-center gap-3 group no-underline"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
