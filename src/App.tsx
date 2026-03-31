@@ -286,7 +286,7 @@ export default function App() {
             <div className="flex justify-center gap-1 mb-4">
               {[...Array(5)].map((_, i) => <Star key={i} className="fill-brand-accent text-brand-accent w-6 h-6" />)}
             </div>
-            <h2 className="text-3xl font-bold text-gray-900">O que dizem as nossas alunas</h2>
+            <h2 className="text-3xl font-bold text-gray-900">o que os nossos alunos dizem</h2>
             <p className="text-gray-500 mt-2">Mais de 5.000 pessoas já transformaram as suas vidas</p>
           </div>
 
