@@ -39,19 +39,22 @@ export default function App() {
       name: "Maria Helena",
       text: "Alguém já comprou? Recomendo vivamente! As instruções são muito claras e detalhadas. Já comecei a vender para a minha família e amigos!",
       days: "2d",
-      likes: 187
+      likes: 187,
+      avatar: "https://i.pravatar.cc/150?u=Maria"
     },
     {
       name: "Marta Judith",
       text: "Muito obrigada, já recebi os livros! Fiquei surpreendida com a rapidez. Tudo muito claro para quem não conhecia nada do tema.",
       days: "1d",
-      likes: 89
+      likes: 89,
+      avatar: "https://i.pravatar.cc/150?u=Marta"
     },
     {
       name: "Fabián Morales",
       text: "Excelente o livro, muito bem explicado cada detalhe. Estou a ler neste momento e estou a adorar!",
       days: "Agora",
-      likes: 42
+      likes: 42,
+      avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=150&h=150&auto=format&fit=crop"
     }
   ];
 
@@ -87,17 +90,17 @@ export default function App() {
           />
         </div>
 
-        <motion.button 
-          onClick={() => {
-            trackEvent('ViewContent', { content_name: 'Top Navigation Button' });
-            document.getElementById('pricing-section')?.scrollIntoView({ behavior: 'smooth' });
-          }}
-          className="bg-brand-accent text-white px-12 py-4 rounded-2xl text-xl font-bold shadow-xl hover:bg-orange-600 transition-colors mb-12"
+        <motion.a 
+          href="https://pay.hotmart.com/V104993640Q?checkoutMode=10&bid=1774391275941"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => trackEvent('InitiateCheckout', { content_name: 'E-book Sabonetes Artesanais (Top)', value: 10.00, currency: 'EUR' })}
+          className="inline-block bg-brand-accent text-white px-12 py-4 rounded-2xl text-xl font-bold shadow-xl hover:bg-orange-600 transition-colors mb-12 no-underline"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
           QUERO O E-BOOK
-        </motion.button>
+        </motion.a>
 
         <div className="grid md:grid-cols-3 gap-8 text-left py-8 border-y border-gray-200">
           <div className="flex gap-4">
@@ -284,7 +287,7 @@ export default function App() {
               {[...Array(5)].map((_, i) => <Star key={i} className="fill-brand-accent text-brand-accent w-6 h-6" />)}
             </div>
             <h2 className="text-3xl font-bold text-gray-900">O que dizem as nossas alunas</h2>
-            <p className="text-gray-500 mt-2">Mais de 5.000 mulheres já transformaram as suas vidas</p>
+            <p className="text-gray-500 mt-2">Mais de 5.000 pessoas já transformaram as suas vidas</p>
           </div>
 
           <div className="space-y-6">
@@ -297,7 +300,7 @@ export default function App() {
                 viewport={{ once: true }}
               >
                 <div className="w-12 h-12 bg-gray-200 rounded-full shrink-0 overflow-hidden">
-                  <img src={`https://i.pravatar.cc/150?u=${t.name}`} alt={t.name} referrerPolicy="no-referrer" />
+                  <img src={t.avatar} alt={t.name} referrerPolicy="no-referrer" />
                 </div>
                 <div>
                   <div className="flex items-center gap-2 mb-1">
@@ -331,11 +334,6 @@ export default function App() {
           <p className="text-gray-500 text-xs mb-4">
             Este site não faz parte do site do Facebook ou do Facebook Inc. Além disso, este site NÃO é endossado pelo Facebook de forma alguma. FACEBOOK é uma marca comercial da FACEBOOK, Inc.
           </p>
-          <div className="flex justify-center gap-6 text-xs text-gray-400 font-medium uppercase tracking-widest">
-            <a href="#" className="hover:text-white transition-colors">Termos de Uso</a>
-            <a href="#" className="hover:text-white transition-colors">Privacidade</a>
-            <a href="#" className="hover:text-white transition-colors">Contacto</a>
-          </div>
           <p className="mt-8 text-gray-600 text-[10px]">© 2026 Segredos dos Sabonetes de Glicerina. Todos os direitos reservados.</p>
         </div>
       </footer>
