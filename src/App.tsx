@@ -237,7 +237,7 @@ export default function App() {
 
           <div className="bg-brand-secondary p-12 rounded-[40px] border-2 border-brand-accent relative overflow-hidden">
             <div className="absolute top-0 right-0 bg-brand-accent text-white px-6 py-2 rounded-bl-2xl text-sm font-bold uppercase tracking-widest">
-              60% Desconto
+              70 % desconto
             </div>
             
             <div className="flex flex-col items-center mb-8">
