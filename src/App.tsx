@@ -113,7 +113,7 @@ export default function App() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
         >
-          Aprende com <span className="text-brand-accent">50 Receitas de Sabonetes Artesanais de Glicerina</span> e Cria um Rendimento em Casa
+          Aprende com <span className="text-brand-accent">50 Receitas de Sabonetes de Glicerina Artesanais</span> e Cria um Rendimento em Casa
         </motion.h1>
 
         {/* Hero Image (Replaced Video) */}
