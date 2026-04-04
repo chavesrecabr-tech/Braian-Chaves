@@ -102,7 +102,7 @@ export default function App() {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          🚨 Acesso limitado — últimas 7 vagas disponíveis hoje
+          🚨 Acesso limitado — últimas vagas disponíveis hoje
         </motion.p>
       </div>
 
