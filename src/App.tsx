@@ -7,6 +7,26 @@ import SalesNotification from './components/SalesNotification';
 export default function App() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
+  const getDynamicDateRange = () => {
+    const today = new Date();
+    const yesterday = new Date(today);
+    yesterday.setDate(today.getDate() - 1);
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+
+    const monthNames = [
+      "janeiro", "fevereiro", "março", "abril", "maio", "junho",
+      "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"
+    ];
+
+    const d1 = yesterday.getDate();
+    const d2 = today.getDate();
+    const d3 = tomorrow.getDate();
+    const month = monthNames[today.getMonth()];
+
+    return `Oferta válida exclusivamente nos dias ${d1}, ${d2} e ${d3} de ${month}`;
+  };
+
   const trackEvent = (eventName: string, params?: object) => {
     if (typeof window !== 'undefined' && (window as any).fbq) {
       (window as any).fbq('track', eventName, params);
@@ -102,54 +122,57 @@ export default function App() {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          🚨 Acesso limitado — últimas vagas disponíveis hoje
+          {getDynamicDateRange()}
         </motion.p>
       </div>
 
       {/* Hero Section */}
-      <section className="max-w-4xl mx-auto px-6 py-12 text-center">
-        <motion.h1 
-          className="text-4xl md:text-6xl font-bold text-gray-900 leading-tight mb-6"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-        >
-          Aprende com <span className="text-brand-accent">50 Receitas de Sabonetes de Glicerina Artesanais</span> e Cria um Rendimento em Casa
-        </motion.h1>
+      <section className="bg-brand-primary text-white">
+        <div className="max-w-4xl mx-auto px-6 py-12 text-center">
+          <motion.h1 
+            className="text-4xl md:text-6xl font-black leading-tight mb-6 text-white"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+          >
+            70 Receitas de Sabonetes Artesanais de Glicerina para Criar o Seu Próprio Rendimento Extra
+          </motion.h1>
 
-        {/* Hero Image (Replaced Video) */}
-        <div className="relative rounded-2xl overflow-hidden shadow-2xl mb-6 group">
-          <img 
-            src="https://iili.io/BnByjFs.png" 
-            alt="Workshop Preview" 
-            className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700"
-            referrerPolicy="no-referrer"
-          />
-        </div>
-
-        <motion.a 
-          href="https://pay.hotmart.com/V104993640Q?checkoutMode=10&bid=1774391275941"
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={() => trackEvent('InitiateCheckout', { content_name: 'E-book Sabonetes Artesanais (Top)', value: 10.00, currency: 'EUR' })}
-          className="inline-block bg-brand-accent text-white px-12 py-4 rounded-2xl text-xl font-bold shadow-xl hover:bg-orange-600 transition-colors mb-12 no-underline"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          Quero as receitas já
-        </motion.a>
-
-        <div className="grid md:grid-cols-3 gap-8 text-left py-8 border-y border-gray-200">
-          <div className="flex gap-4">
-            <CheckCircle2 className="text-brand-accent shrink-0" />
-            <p className="text-sm font-medium text-gray-700">Aprende do zero ao avançado em tempo recorde</p>
+          {/* Hero Image (Replaced Video) */}
+          <div className="relative rounded-2xl overflow-hidden shadow-2xl mb-6 group">
+            <img 
+              src="https://iili.io/Be0qEQV.png" 
+              alt="Workshop Preview" 
+              className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700"
+              referrerPolicy="no-referrer"
+            />
           </div>
-          <div className="flex gap-4">
-            <CheckCircle2 className="text-brand-accent shrink-0" />
-            <p className="text-sm font-medium text-gray-700">Cria produtos 100% naturais e personalizados</p>
-          </div>
-          <div className="flex gap-4">
-            <CheckCircle2 className="text-brand-accent shrink-0" />
-            <p className="text-sm font-medium text-gray-700">Gera rendimento extra a partir do conforto do teu lar</p>
+
+          <motion.a 
+            href="#pricing-section"
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById('pricing-section')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            className="inline-block bg-brand-accent text-white px-12 py-4 rounded-2xl text-xl font-bold shadow-xl hover:bg-orange-600 transition-colors mb-12 no-underline"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Quero as receitas já
+          </motion.a>
+
+          <div className="grid md:grid-cols-3 gap-8 text-left py-8 border-y border-white/20">
+            <div className="flex gap-4">
+              <CheckCircle2 className="text-brand-accent shrink-0" />
+              <p className="text-sm font-medium text-white/90">Aprende do zero ao avançado em tempo recorde</p>
+            </div>
+            <div className="flex gap-4">
+              <CheckCircle2 className="text-brand-accent shrink-0" />
+              <p className="text-sm font-medium text-white/90">Cria produtos 100% naturais e personalizados</p>
+            </div>
+            <div className="flex gap-4">
+              <CheckCircle2 className="text-brand-accent shrink-0" />
+              <p className="text-sm font-medium text-white/90">Gera rendimento extra a partir do conforto do teu lar</p>
+            </div>
           </div>
         </div>
       </section>
@@ -228,15 +251,60 @@ export default function App() {
 
         <div className="text-center mt-12">
           <motion.a 
-            href="https://pay.hotmart.com/V104993640Q?checkoutMode=10&bid=1774391275941"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => trackEvent('InitiateCheckout', { content_name: 'E-book Sabonetes Artesanais (Benefits)', value: 10.00, currency: 'EUR' })}
+            href="#pricing-section"
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById('pricing-section')?.scrollIntoView({ behavior: 'smooth' });
+            }}
             className="inline-block bg-brand-accent text-white px-12 py-4 rounded-2xl text-xl font-bold shadow-xl hover:bg-orange-600 transition-colors no-underline"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
             Quero começar agora
+          </motion.a>
+        </div>
+      </section>
+
+      {/* Packaging Showcase Section */}
+      <section className="bg-white py-24">
+        <div className="max-w-6xl mx-auto px-6 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-12">
+            Olha como vão ficar <span className="text-brand-accent">embalados e prontos para vender</span> os teus sabonetes artesanais de luxo.
+          </h2>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            {[
+              "https://iili.io/BnBOMgf.webp",
+              "https://iili.io/BnBv6ml.webp",
+              "https://iili.io/BnBijmg.jpg",
+              "https://iili.io/BnBQT1R.jpg"
+            ].map((img, idx) => (
+              <motion.div 
+                key={idx}
+                className="aspect-square rounded-2xl overflow-hidden shadow-sm border border-gray-100"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+              >
+                <img src={img} alt="Soap Packaging" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+              </motion.div>
+            ))}
+          </div>
+          
+          <p className="text-xl font-medium text-gray-500 italic mb-12">E muito mais...</p>
+
+          <motion.a 
+            href="#pricing-section"
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById('pricing-section')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            className="inline-block bg-brand-accent text-white px-12 py-4 rounded-2xl text-xl font-bold shadow-xl hover:bg-orange-600 transition-colors no-underline"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Garantir o meu acesso
           </motion.a>
         </div>
       </section>
@@ -347,46 +415,50 @@ export default function App() {
         </div>
       </section>
 
-      {/* Packaging Showcase Section */}
-      <section className="bg-white py-24">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-12">
-            Olha como vão ficar <span className="text-brand-accent">embalados e prontos para vender</span> os teus sabonetes artesanais de luxo.
-          </h2>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            {[
-              "https://iili.io/BnBOMgf.webp",
-              "https://iili.io/BnBv6ml.webp",
-              "https://iili.io/BnBijmg.jpg",
-              "https://iili.io/BnBQT1R.jpg"
-            ].map((img, idx) => (
-              <motion.div 
-                key={idx}
-                className="aspect-square rounded-2xl overflow-hidden shadow-sm border border-gray-100"
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-              >
-                <img src={img} alt="Soap Packaging" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
-              </motion.div>
-            ))}
-          </div>
-          
-          <p className="text-xl font-medium text-gray-500 italic mb-12">E muito mais...</p>
+      {/* Expert Section */}
+      <section className="py-24 bg-white overflow-hidden">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
+            <motion.div 
+              className="relative w-full md:w-1/2"
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <div className="relative z-10 rounded-[40px] overflow-hidden border-8 border-white bg-white">
+                <img 
+                  src="https://iili.io/Be0VNjf.png" 
+                  alt="Márcia Nunes" 
+                  className="w-full h-auto"
+                />
+              </div>
+              {/* Decorative elements */}
+              <div className="absolute -top-6 -left-6 w-32 h-32 bg-brand-accent/10 rounded-full blur-3xl z-0"></div>
+              <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-brand-primary/5 rounded-full blur-3xl z-0"></div>
+            </motion.div>
 
-          <motion.a 
-            href="https://pay.hotmart.com/V104993640Q?checkoutMode=10&bid=1774391275941"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => trackEvent('InitiateCheckout', { content_name: 'E-book Sabonetes Artesanais (Packaging)', value: 10.00, currency: 'EUR' })}
-            className="inline-block bg-brand-accent text-white px-12 py-4 rounded-2xl text-xl font-bold shadow-xl hover:bg-orange-600 transition-colors no-underline"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Garantir o meu acesso
-          </motion.a>
+            <motion.div 
+              className="w-full md:w-1/2"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <span className="text-brand-accent font-bold uppercase tracking-widest text-sm mb-4 block">A tua mentora</span>
+              <h2 className="text-4xl font-bold text-gray-900 mb-6 leading-tight">Olá, eu sou a <span className="text-brand-accent italic">Márcia Nunes</span></h2>
+              <div className="space-y-6 text-gray-600 text-lg leading-relaxed">
+                <p>
+                  Dedico-me ao sabonete artesanal de glicerina para ajudar mulheres a conquistarem a sua <span className="font-bold text-gray-900">independência financeira</span> com produtos de luxo criados em casa.
+                </p>
+                <p>
+                  Este guia de 70 receitas de sabonetes de glicerina é o caminho mais curto para começares o teu negócio lucrativo do zero absoluto.
+                </p>
+              </div>
+              <div className="mt-10 flex items-center gap-4">
+                <div className="w-12 h-px bg-brand-accent"></div>
+                <p className="font-serif italic text-2xl text-gray-800">Márcia Nunes</p>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -421,121 +493,108 @@ export default function App() {
         </div>
       </section>
 
-      {/* Total Value Section */}
-      <section className="bg-brand-secondary/30 py-16">
-        <div className="max-w-2xl mx-auto px-6">
-          <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-10 leading-tight">
-            Se fosse adquirir tudo separadamente, o seu investimento seria:
-          </h2>
-          
-          <div className="bg-white rounded-[32px] shadow-xl p-8 md:p-10 border border-gray-100">
-            <div className="space-y-6">
-              <div className="flex justify-between items-center text-gray-600 pb-4 border-b border-gray-50">
-                <span className="text-lg">E-book 50 Receitas de Sabonetes</span>
-                <span className="font-bold text-gray-900">37,00€</span>
-              </div>
-              <div className="flex justify-between items-center text-gray-600 pb-4 border-b border-gray-50">
-                <span className="text-lg">Bónus 1: Velas Artesanais</span>
-                <span className="font-bold text-gray-900">12,00€</span>
-              </div>
-              <div className="flex justify-between items-center text-gray-600 pb-4 border-b border-gray-50">
-                <span className="text-lg">Bónus 2: Moldes de Silicone</span>
-                <span className="font-bold text-gray-900">12,00€</span>
-              </div>
-              <div className="flex justify-between items-center text-gray-600 pb-6 border-b border-gray-50">
-                <span className="text-lg">Bónus 3: Cremes Faciais</span>
-                <span className="font-bold text-gray-900">19,00€</span>
-              </div>
-              
-              <div className="flex justify-between items-center pt-4">
-                <span className="text-xl font-black text-gray-900 uppercase tracking-wider">VALOR TOTAL:</span>
-                <span className="text-3xl font-bold text-red-500 line-through decoration-gray-900 decoration-4">80,00€</span>
+      {/* Total Value & Pricing Section (Redesigned) */}
+      <section id="pricing-section" className="py-24 bg-gray-50">
+        <div className="max-w-xl mx-auto px-6">
+          <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-200">
+            {/* Header Bars */}
+            <div className="bg-[#4ADE80] text-white py-3 text-center font-black text-xl uppercase tracking-widest">
+              Plano Completo
+            </div>
+            <div className="bg-[#EF4444] text-white py-4 text-center font-black text-lg leading-tight px-4">
+              COMBO COMPLETO + TODOS OS BÔNUS
+            </div>
+
+            {/* Bundle Image */}
+            <div className="p-4">
+              <div className="relative rounded-xl overflow-hidden shadow-lg">
+                <img 
+                  src="https://iili.io/Be0qEQV.png" 
+                  alt="Combo Completo" 
+                  className="w-full h-auto"
+                  referrerPolicy="no-referrer"
+                />
               </div>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Pricing Section */}
-      <section id="pricing-section" className="py-24 bg-white">
-        <div className="max-w-3xl mx-auto px-6 text-center">
-          <Award className="w-16 h-16 text-brand-accent mx-auto mb-6" />
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 italic text-gray-900">Oferta Especial de Lançamento</h2>
-          <p className="text-gray-600 mb-12 text-lg">
-            O valor total deste pacote (E-book + 3 Bónus) é superior a <span className="font-bold text-gray-900">70 €</span>. 
-            Mas hoje, queremos ajudar-te a começar o teu negócio com um investimento mínimo.
-          </p>
-
-          <div className="relative p-12 rounded-[40px] border-2 border-brand-accent overflow-hidden group">
-            {/* Background Image Overlay */}
-            <div 
-              className="absolute inset-0 z-0 opacity-[0.08] group-hover:opacity-[0.12] transition-opacity duration-700"
-              style={{ 
-                backgroundImage: 'url(https://iili.io/BnByjFs.png)',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center'
-              }}
-            />
-            
-            <div className="relative z-10 flex flex-col items-center">
-              <div className="bg-brand-accent text-white px-8 py-2 rounded-full text-sm font-bold uppercase tracking-widest mb-6 shadow-lg">
-                70% desconto
+            {/* Pricing Info */}
+            <div className="px-8 pt-6 pb-2 text-center">
+              <div className="text-[#EF4444] font-bold text-lg line-through mb-1">
+                Valor Total: €80,00
               </div>
-              
-              <div className="flex flex-col items-center mb-8">
-                <span className="text-gray-400 line-through text-2xl mb-2">37,00€</span>
-                <div className="flex items-baseline gap-2">
-                  <span className="text-6xl md:text-8xl font-bold text-brand-accent">10€</span>
+              <div className="text-gray-900 font-bold text-sm uppercase tracking-tighter mb-2">
+                HOJE PAGAMENTO ÚNICO
+              </div>
+              <div className="text-[#22C55E] font-black text-7xl mb-6">
+                €10
+              </div>
+            </div>
+
+            {/* Checklist */}
+            <div className="px-8 pb-8 space-y-4">
+              {[
+                { title: "70 RECEITAS DE SABONETES + BÓNUS:", desc: "Desenvolvido para criar o seu próprio rendimento extra com saboaria de glicerina." },
+                { title: "BÓNUS 1: VELAS ARTESANAIS:", desc: "Aprenda a criar velas aromáticas para complementar o seu catálogo." },
+                { title: "BÓNUS 2: MOLDES DE SILICONE:", desc: "Guia prático para criar os seus próprios moldes e economizar." },
+                { title: "BÓNUS 3: CREMES FACIAIS:", desc: "Receitas exclusivas para cuidados da pele e hidratação." },
+              ].map((item, idx) => (
+                <div key={idx} className="flex gap-3 items-start">
+                  <div className="mt-1 bg-[#22C55E] rounded-full p-1 shrink-0">
+                    <Check className="w-3 h-3 text-white stroke-[4px]" />
+                  </div>
+                  <div>
+                    <p className="font-black text-gray-900 text-sm leading-tight">{item.title}</p>
+                    <p className="text-gray-600 text-xs leading-tight mt-1">{item.desc}</p>
+                  </div>
                 </div>
-                <p className="text-gray-500 mt-4 font-medium uppercase tracking-widest text-xs">Pagamento Único • Acesso Vitalício</p>
+              ))}
+
+              <div className="flex gap-3 items-center pt-2">
+                <div className="bg-[#22C55E] rounded-full p-1 shrink-0">
+                  <Check className="w-3 h-3 text-white stroke-[4px]" />
+                </div>
+                <p className="font-black text-gray-900 text-sm uppercase">DIREITO A TODAS AS ATUALIZAÇÕES</p>
               </div>
 
+              <div className="flex gap-3 items-center">
+                <div className="bg-[#22C55E] rounded-full p-1 shrink-0">
+                  <Check className="w-3 h-3 text-white stroke-[4px]" />
+                </div>
+                <p className="font-black text-gray-900 text-sm uppercase">ACESSO VITALÍCIO</p>
+              </div>
+            </div>
+
+            {/* Guarantee Small */}
+            <div className="px-8 pb-8">
+              <div className="bg-gray-50 rounded-2xl p-4 border border-gray-100 flex items-center gap-4">
+                <ShieldCheck className="w-10 h-10 text-green-600 shrink-0" />
+                <p className="text-[10px] text-gray-500 leading-tight">
+                  <span className="font-bold text-gray-900 block mb-1">GARANTIA DE 30 DIAS</span>
+                  Se não ficar satisfeita, devolvemos 100% do seu dinheiro sem perguntas.
+                </p>
+              </div>
+            </div>
+
+            {/* Final CTA */}
+            <div className="px-8 pb-8 text-center">
               <motion.a 
                 href="https://pay.hotmart.com/V104993640Q?checkoutMode=10&bid=1774391275941"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => trackEvent('InitiateCheckout', { content_name: 'E-book Sabonetes Artesanais', value: 10.00, currency: 'EUR' })}
-                className="w-full bg-brand-accent text-white py-6 rounded-2xl text-xl font-bold shadow-xl hover:bg-orange-600 transition-colors flex items-center justify-center gap-3 group no-underline"
+                className="w-full bg-[#22C55E] text-white py-5 rounded-full text-lg font-black shadow-[0_10px_20px_rgba(34,197,94,0.3)] hover:brightness-110 transition-all flex items-center justify-center gap-3 no-underline uppercase"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Sim, quero todas as receitas mais os bónus
-                <ArrowRight className="group-hover:translate-x-1 transition-transform" />
+                SIM, QUERO O PLANO COMPLETO!
               </motion.a>
-
-              <div className="mt-8 flex items-center justify-center gap-6 text-green-600">
-                <div className="flex items-center gap-2">
-                  <ShieldCheck className="w-5 h-5" />
-                  <span className="text-xs font-bold uppercase">Compra Segura</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Clock className="w-5 h-5" />
-                  <span className="text-xs font-bold uppercase">Acesso Imediato</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-12 flex flex-col items-center gap-12">
-            <CountdownTimer />
-            
-            <div className="flex flex-col md:flex-row items-center gap-8 bg-gray-50 p-8 rounded-[32px] border border-gray-100 max-w-2xl">
-              <div className="relative w-24 h-24 shrink-0">
-                <div className="absolute inset-0 bg-green-500 rounded-full flex items-center justify-center">
-                  <Check className="text-white w-12 h-12 stroke-[4px]" />
-                </div>
-              </div>
-              <div className="text-left">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Garantia Incondicional de 7 Dias</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  Tem 7 dias para testar o método. Se por qualquer motivo achar que não é para si, basta enviar um e-mail e devolvemos 100% do seu dinheiro. Sem perguntas, sem burocracia.
-                </p>
-              </div>
+              <p className="mt-4 text-[10px] font-bold text-gray-900 uppercase tracking-tighter">
+                APROVEITE AGORA: <span className="underline">VOCÊ NÃO VAI ENCONTRAR ESSE PREÇO DEPOIS.</span>
+              </p>
             </div>
           </div>
         </div>
       </section>
-
       {/* FAQ Section */}
       <section className="py-24 bg-gray-50">
         <div className="max-w-3xl mx-auto px-6">
@@ -607,7 +666,7 @@ export default function App() {
         </div>
       </footer>
 
-      <SalesNotification />
+      {/* <SalesNotification /> */}
     </div>
   );
 }
