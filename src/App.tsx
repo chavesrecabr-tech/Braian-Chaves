@@ -494,7 +494,7 @@ export default function App() {
       </section>
 
       {/* Total Value & Pricing Section (Redesigned) */}
-      <section id="pricing-section" className="py-24 bg-gray-50">
+      <section id="pricing-section" className="py-24 bg-blue-600">
         <div className="max-w-xl mx-auto px-6">
           <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-200">
             {/* Header Bars */}
@@ -533,7 +533,7 @@ export default function App() {
             {/* Checklist */}
             <div className="px-8 pb-8 space-y-4">
               {[
-                { title: "70 RECEITAS DE SABONETES + BÓNUS:", desc: "Desenvolvido para criar o seu próprio rendimento extra com saboaria de glicerina." },
+                { title: "70 RECEITAS DE SABONETES + BÓNUS:", desc: "Desenvolvido para criar o seu próprio rendimento extra com sabonetes de glicerina." },
                 { title: "BÓNUS 1: VELAS ARTESANAIS:", desc: "Aprenda a criar velas aromáticas para complementar o seu catálogo." },
                 { title: "BÓNUS 2: MOLDES DE SILICONE:", desc: "Guia prático para criar os seus próprios moldes e economizar." },
                 { title: "BÓNUS 3: CREMES FACIAIS:", desc: "Receitas exclusivas para cuidados da pele e hidratação." },
