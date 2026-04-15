@@ -502,7 +502,7 @@ export default function App() {
               Plano Completo
             </div>
             <div className="bg-[#EF4444] text-white py-4 text-center font-black text-lg leading-tight px-4">
-              COMBO COMPLETO + TODOS OS BÔNUS
+              COMBO COMPLETO + TODOS OS BÓNUS
             </div>
 
             {/* Bundle Image */}
